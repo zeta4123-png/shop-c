@@ -85,5 +85,5 @@ app.post('/edit/:id', upload.single('image'), (req, res) => {
 // app.listen(3007, () => console.log('Server running at http://localhost:3007'));
 // const PORT = 80;
 app.listen(80, () => {
-  console.log(`Server is running on port ${PORT} running at http://localhost:3007`);
+  console.log(`Server is running on running at http://localhost:3007`);
 });
