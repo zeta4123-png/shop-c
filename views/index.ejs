@@ -1,0 +1,45 @@
+<div>
+    <img src="/pic/a2096c81-5f82-4b9b-8666-55aa0d81b71c.jpg" style="width: 100%;">
+</div>
+
+<h1>Product List</h1>
+
+<div style="margin-bottom: 20px;">
+    <input type="text" id="searchInput" placeholder="พิมพ์ชื่อสินค้าเพื่อค้นหา..." 
+    style="padding: 10px; width: 100%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
+</div>
+
+<a href="/add">Add New Product</a>
+<div id="productGrid" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+    <% products.forEach(p => { %>
+        <div class="product-card" data-name="<%= p.name.toLowerCase() %>" 
+             style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; width: 200px; text-align: center;">
+            <img src="/uploads/<%= p.image %>" style="width: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 10px;"><br>
+            <strong class="product-title"><%= p.name %></strong><br>
+            <span style="color: #2ecc71; font-weight: 600; font-size: 150%;">ราคา <%= p.price %> บาท</span><br>
+            <div style="margin-top: 10px;">
+                <a href="/edit/<%= p.id %>">Edit</a> | 
+                <a href="/delete/<%= p.id %>" onclick="return confirm('Delete?')">Delete</a>
+            </div>
+        </div>
+    <% }) %>
+</div>
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const productCards = document.querySelectorAll('.product-card');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        productCards.forEach(card => {
+            const productName = card.getAttribute('data-name');
+            
+            // ถ้าชื่อสินค้ามีคำที่พิมพ์อยู่ ให้แสดงผล ถ้าไม่มีให้ซ่อน
+            if (productName.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
